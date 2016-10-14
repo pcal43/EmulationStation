@@ -33,11 +33,12 @@ std::string removeParenthesis(const std::string& str);
 class FileData
 {
 public:
-	FileData(FileType type, const boost::filesystem::path& path, SystemData* system);
+	FileData(FileType type, const boost::filesystem::path& path, SystemData* system, bool isSingle=false);
 	virtual ~FileData();
 
 	inline const std::string& getName() const { return metadata.get("name"); }
 	inline FileType getType() const { return mType; }
+	inline bool isSingle() const { return mIsSingle; }
 	inline const boost::filesystem::path& getPath() const { return mPath; }
 	inline FileData* getParent() const { return mParent; }
 	inline const std::unordered_map<std::string, FileData*>& getChildrenByFilename() const { return mChildrenByFilename; }
@@ -75,6 +76,7 @@ public:
 
 private:
 	FileType mType;
+	bool mIsSingle;
 	boost::filesystem::path mPath;
 	SystemData* mSystem;
 	FileData* mParent;

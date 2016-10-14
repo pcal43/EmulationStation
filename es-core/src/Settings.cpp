@@ -17,7 +17,8 @@ std::vector<const char*> settings_dont_save = boost::assign::list_of
 	("Windowed")
 	("VSync")
 	("HideConsole")
-	("IgnoreGamelist");
+	("IgnoreGamelist")
+	("SingleGameDirs");
 
 Settings::Settings()
 {
@@ -63,6 +64,7 @@ void Settings::setDefaults()
 	mBoolMap["Debug"] = false;
 	mBoolMap["DebugGrid"] = false;
 	mBoolMap["DebugText"] = false;
+	mBoolMap["SingleGameDirs"] = false;
 
 	mIntMap["ScreenSaverTime"] = 5*60*1000; // 5 minutes
 	mIntMap["ScraperResizeWidth"] = 400;

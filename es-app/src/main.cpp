@@ -49,6 +49,9 @@ bool parseArgs(int argc, char* argv[], unsigned int* width, unsigned int* height
 		}else if(strcmp(argv[i], "--ignore-gamelist") == 0)
 		{
 			Settings::getInstance()->setBool("IgnoreGamelist", true);
+		}else if(strcmp(argv[i], "--single-game-dirs") == 0)
+		{
+			Settings::getInstance()->setBool("SingleGameDirs", true);
 		}else if(strcmp(argv[i], "--draw-framerate") == 0)
 		{
 			Settings::getInstance()->setBool("DrawFramerate", true);
@@ -89,6 +92,7 @@ bool parseArgs(int argc, char* argv[], unsigned int* width, unsigned int* height
 				"--resolution [width] [height]	try and force a particular resolution\n"
 				"--gamelist-only			skip automatic game search, only read from gamelist.xml\n"
 				"--ignore-gamelist		ignore the gamelist (useful for troubleshooting)\n"
+				"--single-game-dirs		expect multi-file games in their own directories\n"
 				"--draw-framerate		display the framerate\n"
 				"--no-exit			don't show the exit option in the menu\n"
 				"--debug				more logging, show console on Windows\n"

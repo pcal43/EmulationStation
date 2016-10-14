@@ -41,6 +41,13 @@ FileData* findOrCreateFile(SystemData* system, const boost::filesystem::path& pa
 		if (found) {
 			treeNode = children.at(key);
 		}
+		if (Settings::getInstance()->getBool("SingleGameDirs") && path_it != --relative.end()) {
+			key = next(path_it)->string();
+			if (children.find(key) != children.end()) {
+				FileData* single = children.at(key);
+				if (single->isSingle()) return single;
+			}
+		}
 
 		// this is the end
 		if(path_it == --relative.end())

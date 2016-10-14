@@ -200,6 +200,20 @@ void SystemData::populateFolder(FileData* folder)
 			//ignore folders that do not contain games
 			if(newFolder->getChildrenByFilename().size() == 0)
 				delete newFolder;
+			else if(Settings::getInstance()->getBool("SingleGameDirs") &&
+				newFolder->getChildren().size() == 1 &&
+				!newFolder->getChildren().at(0)->isSingle()) {
+ 					// if there's one game in the directory, promote it up a level
+					FileData* newChildOriginal = newFolder->getChildren().at(0);
+					if (newChildOriginal->getType() == GAME) {
+						FileData* newChild = new FileData(GAME, newChildOriginal->getPath().generic_string(), this, true);
+						folder->addChild(newChild);
+						delete newChildOriginal;
+						delete newFolder;
+					} else {
+						folder->addChild(newFolder);
+					}
+			}
 			else
 				folder->addChild(newFolder);
 		}
